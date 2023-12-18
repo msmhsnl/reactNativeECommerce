@@ -6,6 +6,7 @@ import type { Product } from "../../types/product";
 
 type ProductCardProps = {
   item: Product;
+  navigateToDetail: (productId: string) => void;
 };
 
 const ProductCard = (props: ProductCardProps) => {
@@ -13,13 +14,13 @@ const ProductCard = (props: ProductCardProps) => {
     <View className="p-2 w-1/2 h-64 shadow-gray-950">
       <TouchableOpacity
         className="bg-white w-full h-full shadow-dark-950 shadow-md rounded-xl overflow-hidden"
-        onPress={() => console.log("PRESSED_1", props.item)}
+        onPress={() => props.navigateToDetail(props.item.id)}
       >
         <Image source={{ uri: props.item.image }} className="w-full h-1/2" />
         <View className="flex-1 p-2 justify-between">
           <View>
             <Text className="text-base font-semibold text-gray-600">
-              {props.item.price}₺
+              {`${props.item?.price} ₺`}
             </Text>
             <Text className="text-sm font-semibold text-gray-600">
               {props.item.name}

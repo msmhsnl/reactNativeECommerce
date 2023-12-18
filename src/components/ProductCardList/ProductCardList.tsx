@@ -9,6 +9,7 @@ import type { Product } from "../../types/product";
 type ProductCardListProps = {
   data: Product[];
   getNextPageProducts: () => void;
+  navigateToDetail: (productId: string) => void;
 };
 
 const ProductCardList = (props: ProductCardListProps) => {
@@ -17,7 +18,9 @@ const ProductCardList = (props: ProductCardListProps) => {
       contentContainerStyle={{ paddingBottom: 20 }}
       className="p-2 bg-blue-50"
       data={props.data}
-      renderItem={({ index, item }) => <ProductCard item={item} />}
+      renderItem={({ index, item }) => (
+        <ProductCard item={item} navigateToDetail={props.navigateToDetail} />
+      )}
       keyExtractor={(item) => item.id}
       numColumns={2}
       ItemSeparatorComponent={() => <View />}
