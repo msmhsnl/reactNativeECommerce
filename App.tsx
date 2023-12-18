@@ -1,4 +1,3 @@
-// import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
@@ -9,10 +8,9 @@ import CartScreen from "./src/screens/CartScreen";
 
 import type { RootTabParamList } from "./src/navigation/NavigationTypes";
 
-import configureStore from "./src/redux/store";
 import { Provider } from "react-redux";
+import store from "./src/redux/store";
 
-const store = configureStore();
 const Tab = createBottomTabNavigator<RootTabParamList>();
 
 export default function App() {
