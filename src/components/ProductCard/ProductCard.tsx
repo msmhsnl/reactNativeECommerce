@@ -18,18 +18,18 @@ const ProductCard = (props: ProductCardProps) => {
         <Image source={{ uri: props.item.image }} className="w-full h-1/2" />
         <View className="flex-1 p-2 justify-between">
           <View>
-            <Text className="text-sm font-bold text-gray-600">
+            <Text className="text-base font-semibold text-gray-600">
               {props.item.price}₺
             </Text>
-            <Text className="text-base font-semibold text-gray-600">
+            <Text className="text-sm font-semibold text-gray-600">
               {props.item.name}
             </Text>
           </View>
           <TouchableOpacity
-            className="bg-white w-full h-10 bg-blue-200 rounded-lg justify-center"
+            className="bg-white w-full h-10 bg-orange-300 rounded-lg justify-center"
             onPress={() => console.log("PRESSED_2", props.item)}
           >
-            <Text className="text-center text-base font-semibold text-gray-600">
+            <Text className="text-center text-base font-semibold text-gray-500">
               Add To Cart
             </Text>
           </TouchableOpacity>

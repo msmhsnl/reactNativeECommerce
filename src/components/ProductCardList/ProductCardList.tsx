@@ -8,6 +8,7 @@ import type { Product } from "../../types/product";
 
 type ProductCardListProps = {
   data: Product[];
+  getNextPageProducts: () => void;
 };
 
 const ProductCardList = (props: ProductCardListProps) => {
@@ -20,6 +21,7 @@ const ProductCardList = (props: ProductCardListProps) => {
       keyExtractor={(item) => item.id}
       numColumns={2}
       ItemSeparatorComponent={() => <View />}
+      onEndReached={props.getNextPageProducts}
     />
   );
 };

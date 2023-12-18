@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
+import axios from "axios";
 
 import type { HomeProps } from "../navigation/NavigationTypes";
 import { setProducts, addProducts } from "../redux/products/actions";
@@ -9,11 +11,26 @@ import { bindActionCreators, Dispatch } from "redux";
 
 import ProductCardList from "../components/ProductCardList/ProductCardList";
 
+import type { Product } from "../types/product";
+
+import getProductsByFilter from "../methods/getProductsByFilter";
+
 const HomeScreen = (props: HomeProps & AppProps) => {
+  const [page, setPage] = useState(1);
   const testText = process.env.EXPO_PUBLIC_TEST;
 
   const navigateToDetail = () => {
     props.navigation.navigate("Detail", { productId: "TestProductId" });
+  };
+
+  useEffect(() => {
+    getProductsByFilter(props.setProducts, page, null);
+  }, []);
+
+  const getNextPageProducts = () => {
+    const newPage = page + 1;
+    setPage(newPage);
+    getProductsByFilter(props.addProducts, newPage, null);
   };
 
   return (
@@ -316,7 +333,10 @@ const HomeScreen = (props: HomeProps & AppProps) => {
         }}
       /> */}
 
-      <ProductCardList data={props.products} />
+      <ProductCardList
+        data={props.products}
+        getNextPageProducts={getNextPageProducts}
+      />
     </SafeAreaView>
   );
 };
