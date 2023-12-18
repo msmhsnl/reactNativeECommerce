@@ -6,6 +6,7 @@ import axios from "axios";
 
 import type { HomeProps } from "../navigation/NavigationTypes";
 import { setProducts, addProducts } from "../redux/products/actions";
+import { setCart } from "../redux/cart/actions";
 import { AppState } from "../redux/store";
 import { bindActionCreators, Dispatch } from "redux";
 
@@ -15,9 +16,15 @@ import type { Product } from "../types/product";
 
 import getProductsByFilter from "../methods/getProductsByFilter";
 
+import { initReduxCart } from "../methods/cart/cartHelper";
+
 const HomeScreen = (props: HomeProps & AppProps) => {
   const [page, setPage] = useState(1);
   const testText = process.env.EXPO_PUBLIC_TEST;
+
+  useEffect(() => {
+    initReduxCart();
+  }, []);
 
   const navigateToDetail = (productId: string) => {
     props.navigation.navigate("Detail", { productId: productId });
@@ -34,7 +41,7 @@ const HomeScreen = (props: HomeProps & AppProps) => {
   };
 
   return (
-    <SafeAreaView className="flex-1 bg-white">
+    <SafeAreaView className="flex-1 bg-blue-50">
       <StatusBar />
       <ProductCardList
         data={props.products}
@@ -59,7 +66,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ setProducts, addProducts }, dispatch);
+  bindActionCreators({ setProducts, addProducts, setCart }, dispatch);
 
 type AppProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;

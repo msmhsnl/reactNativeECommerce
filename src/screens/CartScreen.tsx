@@ -1,17 +1,65 @@
+import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+  Image,
+  ScrollView,
+} from "react-native";
 
 import type { CartProps } from "../navigation/NavigationTypes";
 
-const CartScreen = ({ route, navigation }: CartProps) => {
-  const navigateToDetail = () => {
-    navigation.navigate("Detail", { productId: "TestProductId" });
+import { connect } from "react-redux";
+import { AppState } from "../redux/store";
+import { bindActionCreators, Dispatch } from "redux";
+
+import CartCounter from "../components/CartCounter/CartCounter";
+
+const CartScreen = (props: CartProps & AppProps) => {
+  const navigateToDetail = (productId: string) => {
+    props.navigation.navigate("Detail", { productId: productId });
   };
+
+  // useEffect(() => {
+  //   console.log(
+  //     "CART---------------------------------------------------------",
+  //     props.cart
+  //   );
+  // });
+
   return (
-    <View style={styles.container}>
-      <Text>CART</Text>
-      <StatusBar style="auto" />
-    </View>
+    <SafeAreaView className="flex-1 bg-blue-50">
+      <StatusBar />
+      <ScrollView>
+        {props.cart?.map((item, index) => (
+          <View className="p-2 w-full h-20 shadow-gray-950" key={index}>
+            <TouchableOpacity
+              className="bg-white w-full h-full shadow-dark-950 shadow-md rounded-xl overflow-hidden flex-row"
+              onPress={() => navigateToDetail(item.product.id)}
+            >
+              <Image
+                source={{ uri: item.product.image }}
+                className="w-1/4 h-full"
+              />
+              <View className="flex-1 p-2 justify-between">
+                <View>
+                  <Text className="text-base font-semibold text-gray-600">
+                    {`${item.product?.price} ₺`}
+                  </Text>
+                  <Text className="text-sm font-semibold text-gray-600">
+                    {item.product.name}
+                  </Text>
+                </View>
+              </View>
+              <CartCounter count={5} />
+            </TouchableOpacity>
+          </View>
+        ))}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
@@ -24,4 +72,13 @@ const styles = StyleSheet.create({
   },
 });
 
-export default CartScreen;
+const mapStateToProps = (state: AppState) => ({
+  ...state.cart,
+});
+
+// const mapDispatchToProps = (dispatch: Dispatch) =>
+//   bindActionCreators({ setProducts, addProducts, setCart }, dispatch);
+
+type AppProps = ReturnType<typeof mapStateToProps>;
+
+export default connect(mapStateToProps)(CartScreen);

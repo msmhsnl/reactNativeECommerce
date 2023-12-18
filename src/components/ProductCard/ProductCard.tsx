@@ -1,8 +1,10 @@
-import { Text, TouchableOpacity, View, Image } from "react-native";
 import React from "react";
+import { Text, TouchableOpacity, View, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import type { Product } from "../../types/product";
+
+import { addToCart } from "../../methods/cart/cartHelper";
 
 type ProductCardProps = {
   item: Product;
@@ -27,8 +29,8 @@ const ProductCard = (props: ProductCardProps) => {
             </Text>
           </View>
           <TouchableOpacity
-            className="bg-white w-full h-10 bg-orange-300 rounded-lg justify-center"
-            onPress={() => console.log("PRESSED_2", props.item)}
+            className="w-full h-10 bg-orange-300 rounded-lg justify-center"
+            onPress={() => addToCart(props.item)}
           >
             <Text className="text-center text-base font-semibold text-gray-500">
               Add To Cart
