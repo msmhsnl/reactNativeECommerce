@@ -12,6 +12,7 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 
 import type { DetailProps } from "../navigation/NavigationTypes";
+import type { Product } from "../types/product";
 
 import getProductById from "../methods/getProductById";
 
@@ -20,12 +21,19 @@ const DetailScreen = ({ route, navigation }: DetailProps) => {
   const { productId } = route.params;
   const isFocused = useIsFocused();
 
+  const manageDetailContent = (
+    currentProduct: Product,
+    detailProductId: string
+  ) => {
+    if (currentProduct.id != detailProductId) {
+      setProduct(null);
+      getProductById(setProduct, productId);
+    }
+  };
+
   useEffect(() => {
-    setProduct(null);
-  }, [isFocused]);
-  useEffect(() => {
-    getProductById(setProduct, productId);
-  }, [productId]);
+    manageDetailContent(product, productId);
+  }, [isFocused, productId]);
 
   return product!! ? (
     <SafeAreaView className="flex-1 bg-white">
