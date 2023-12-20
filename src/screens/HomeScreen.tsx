@@ -2,17 +2,13 @@ import { useEffect, useState } from "react";
 import { StatusBar } from "expo-status-bar";
 import { StyleSheet, SafeAreaView } from "react-native";
 import { connect } from "react-redux";
-import axios from "axios";
 
 import type { HomeProps } from "../navigation/NavigationTypes";
 import { setProducts, addProducts } from "../redux/products/actions";
-import { setCart } from "../redux/cart/actions";
 import { AppState } from "../redux/store";
 import { bindActionCreators, Dispatch } from "redux";
 
 import ProductCardList from "../components/ProductCardList/ProductCardList";
-
-import type { Product } from "../types/product";
 
 import getProductsByFilter from "../methods/getProductsByFilter";
 
@@ -20,7 +16,6 @@ import { initReduxCart } from "../methods/cart/cartHelper";
 
 const HomeScreen = (props: HomeProps & AppProps) => {
   const [page, setPage] = useState(1);
-  const testText = process.env.EXPO_PUBLIC_TEST;
 
   useEffect(() => {
     initReduxCart();
@@ -66,7 +61,7 @@ const mapStateToProps = (state: AppState) => ({
 });
 
 const mapDispatchToProps = (dispatch: Dispatch) =>
-  bindActionCreators({ setProducts, addProducts, setCart }, dispatch);
+  bindActionCreators({ setProducts, addProducts }, dispatch);
 
 type AppProps = ReturnType<typeof mapStateToProps> &
   ReturnType<typeof mapDispatchToProps>;

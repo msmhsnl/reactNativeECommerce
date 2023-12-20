@@ -12,6 +12,8 @@ import { Ionicons } from "@expo/vector-icons";
 
 type CartCounterProps = {
   count: number;
+  increment: () => void;
+  decrement: () => void;
 };
 
 const CartCounter = (props: CartCounterProps) => {
@@ -19,7 +21,7 @@ const CartCounter = (props: CartCounterProps) => {
     <View className="flex-row m-2 justify-center items-center">
       <TouchableOpacity
         className="w-8 h-8 pr-1 rounded-full bg-orange-200 justify-center items-center"
-        onPress={() => console.log("-")}
+        onPress={props.decrement}
       >
         <Ionicons name="caret-back" size={24} color="gray" />
       </TouchableOpacity>
@@ -30,7 +32,7 @@ const CartCounter = (props: CartCounterProps) => {
       </View>
       <TouchableOpacity
         className="w-8 h-8 pl-1 rounded-full bg-orange-200 justify-center items-center"
-        onPress={() => console.log("+")}
+        onPress={props.increment}
       >
         <Ionicons name="caret-forward" size={24} color="gray" />
       </TouchableOpacity>

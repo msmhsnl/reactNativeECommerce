@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { StatusBar } from "expo-status-bar";
 import {
   SafeAreaView,
@@ -14,21 +13,14 @@ import type { CartProps } from "../navigation/NavigationTypes";
 
 import { connect } from "react-redux";
 import { AppState } from "../redux/store";
-import { bindActionCreators, Dispatch } from "redux";
 
 import CartCounter from "../components/CartCounter/CartCounter";
+import { updateCartQuantity } from "../methods/cart/cartHelper";
 
 const CartScreen = (props: CartProps & AppProps) => {
   const navigateToDetail = (productId: string) => {
     props.navigation.navigate("Detail", { productId: productId });
   };
-
-  // useEffect(() => {
-  //   console.log(
-  //     "CART---------------------------------------------------------",
-  //     props.cart
-  //   );
-  // });
 
   return (
     <SafeAreaView className="flex-1 bg-blue-50">
@@ -54,7 +46,15 @@ const CartScreen = (props: CartProps & AppProps) => {
                   </Text>
                 </View>
               </View>
-              <CartCounter count={5} />
+              <CartCounter
+                count={item.quantity}
+                increment={() =>
+                  updateCartQuantity(item.product.id, item.quantity + 1)
+                }
+                decrement={() =>
+                  updateCartQuantity(item.product.id, item.quantity - 1)
+                }
+              />
             </TouchableOpacity>
           </View>
         ))}
@@ -75,9 +75,6 @@ const styles = StyleSheet.create({
 const mapStateToProps = (state: AppState) => ({
   ...state.cart,
 });
-
-// const mapDispatchToProps = (dispatch: Dispatch) =>
-//   bindActionCreators({ setProducts, addProducts, setCart }, dispatch);
 
 type AppProps = ReturnType<typeof mapStateToProps>;
 
