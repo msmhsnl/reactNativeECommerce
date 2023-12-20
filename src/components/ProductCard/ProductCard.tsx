@@ -1,9 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View, Image } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
 
 import type { Product } from "../../types/product";
-
 import { addToCart } from "../../methods/cart/cartHelper";
 
 type ProductCardProps = {
@@ -43,18 +41,3 @@ const ProductCard = (props: ProductCardProps) => {
 };
 
 export default ProductCard;
-
-// const styles = StyleSheet.create({
-//   container: {
-//     backgroundColor: "#ffffff",
-//     width: 150,
-//     height: 200,
-//     borderRadius: 10,
-//     display: "flex",
-//     flexDirection: "column",
-//     justifyContent: "flex-start",
-//     alignItems: "center",
-//     padding: 5,
-//     elevation: 5,
-//   },
-// });
