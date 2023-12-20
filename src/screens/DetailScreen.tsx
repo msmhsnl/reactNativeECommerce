@@ -15,6 +15,7 @@ import type { DetailProps } from "../navigation/NavigationTypes";
 import type { Product } from "../types/product";
 
 import getProductById from "../methods/getProductById";
+import { addToCart } from "../methods/cart/cartHelper";
 
 const DetailScreen = ({ route, navigation }: DetailProps) => {
   const [product, setProduct] = useState(null);
@@ -25,7 +26,7 @@ const DetailScreen = ({ route, navigation }: DetailProps) => {
     currentProduct: Product,
     detailProductId: string
   ) => {
-    if (currentProduct.id != detailProductId) {
+    if (currentProduct?.id != detailProductId) {
       setProduct(null);
       getProductById(setProduct, productId);
     }
@@ -55,7 +56,7 @@ const DetailScreen = ({ route, navigation }: DetailProps) => {
 
         <TouchableOpacity
           className="bg-white w-full h-10 bg-orange-300 rounded-lg justify-center"
-          onPress={() => console.log("PRESSED_2", product)}
+          onPress={() => addToCart(product)}
         >
           <Text className="text-center text-base font-semibold text-gray-500">
             Add To Cart
