@@ -87,3 +87,9 @@ export const getTotalPrice = (cart: CartProductObj[]) => {
 
   return totalPrice;
 };
+
+export const getTotalQuantity = (cart: CartProductObj[]) => {
+  const totalPrice = cart.reduce((acc, item) => acc + item.quantity, 0);
+
+  return totalPrice;
+};
