@@ -1,34 +1,31 @@
 import axios from "axios";
 
-import type { Product } from "../types/product";
+import type { Product } from "../types/Product";
 
 const mockapiKey = process.env.EXPO_PUBLIC_MOCKAPI_KEY;
 
-const filterSearchParamsConverter = (filterObj: any) => {
+const removeUndefinedAttributes = (obj: object) =>
+  Object.entries(obj).reduce((r, [k, v]) => {
+    if (v === "" || v === null || v === undefined) return r;
+    else r[k] = v;
+
+    return r;
+  }, {});
+
+const filterSearchParamsConverter = async (filterObj: any) => {
+  const currentFilterObj = removeUndefinedAttributes(filterObj);
+  let params = new URLSearchParams(currentFilterObj);
+
+  if (params?._searchParams?.length > 0) {
+    return `&${params.toString()}`;
+  } else {
+    return null;
+  }
   // {
   //   name:'value',//search
   //   sortBy:'price',//
   //   order:'asc'//asc-desc
   // }
-  if (filterObj) {
-    let params = new URLSearchParams(filterObj);
-    let keysForDel: Array<string> = [];
-    params.forEach((value, key) => {
-      if (value == "" || value == null || value == undefined) {
-        keysForDel.push(key);
-      }
-    });
-
-    keysForDel.forEach((key) => {
-      params.delete(key);
-    });
-
-    if (params?.size > 0) {
-      return `&${params.toString()}`;
-    } else {
-      return null;
-    }
-  }
 };
 
 async function getProductsByFilter(
@@ -44,9 +41,9 @@ async function getProductsByFilter(
 
     let managedURL = url.toString();
 
-    const convertedFilter = filterSearchParamsConverter(filters);
+    const convertedFilter = await filterSearchParamsConverter(filters);
     managedURL = convertedFilter
-      ? `${managedURL}&${convertedFilter}`
+      ? `${managedURL}${convertedFilter}`
       : managedURL;
 
     const { data, status } = await axios.get<Product[]>(managedURL, {
@@ -55,17 +52,17 @@ async function getProductsByFilter(
       },
     });
 
-    console.log(JSON.stringify(data, null, 4));
-    console.log("response status is: ", status);
+    // console.log(JSON.stringify(data, null, 4));
+    // console.log("response status is: ", status);
 
     dataSetterCallback(data);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log("error message: ", error.message);
+      // console.log("error message: ", error.message);
       return error.message;
     } else {
-      console.log("unexpected error: ", error);
+      // console.log("unexpected error: ", error);
       return "An unexpected error occurred";
     }
   }

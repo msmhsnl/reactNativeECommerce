@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import type { Product } from "../types/product";
+import type { Product } from "../types/Product";
 
 const mockapiKey = process.env.EXPO_PUBLIC_MOCKAPI_KEY;
 
@@ -18,17 +18,17 @@ async function getProductById(
       },
     });
 
-    console.log(JSON.stringify(data, null, 4));
-    console.log("response status is: ", status);
+    // console.log(JSON.stringify(data, null, 4));
+    // console.log("response status is: ", status);
 
     dataSetterCallback(data?.[0]);
     return data;
   } catch (error) {
     if (axios.isAxiosError(error)) {
-      console.log("error message: ", error.message);
+      // console.log("error message: ", error.message);
       return error.message;
     } else {
-      console.log("unexpected error: ", error);
+      // console.log("unexpected error: ", error);
       return "An unexpected error occurred";
     }
   }
