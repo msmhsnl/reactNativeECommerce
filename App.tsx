@@ -59,7 +59,10 @@ export default function App() {
           <Tab.Screen
             name="Detail"
             component={DetailScreen}
-            options={{ tabBarItemStyle: { display: "none" } }}
+            options={{
+              tabBarItemStyle: { display: "none" },
+              tabBarShowLabel: false,
+            }}
           />
         </Tab.Navigator>
       </NavigationContainer>
