@@ -4,17 +4,52 @@ import type { Product } from "../types/product";
 
 const mockapiKey = process.env.EXPO_PUBLIC_MOCKAPI_KEY;
 
+const filterSearchParamsConverter = (filterObj: any) => {
+  // {
+  //   name:'value',//search
+  //   sortBy:'price',//
+  //   order:'asc'//asc-desc
+  // }
+  if (filterObj) {
+    let params = new URLSearchParams(filterObj);
+    let keysForDel: Array<string> = [];
+    params.forEach((value, key) => {
+      if (value == "" || value == null || value == undefined) {
+        keysForDel.push(key);
+      }
+    });
+
+    keysForDel.forEach((key) => {
+      params.delete(key);
+    });
+
+    if (params?.size > 0) {
+      return `&${params.toString()}`;
+    } else {
+      return null;
+    }
+  }
+};
+
 async function getProductsByFilter(
   dataSetterCallback: (data: Product[]) => void,
   page: number,
-  filters: any
+  filters: any = null
+  //resetpagecallback
 ) {
   try {
     const url = new URL(`https://${mockapiKey}.mockapi.io/products`);
     url.searchParams.append("page", page.toString());
     url.searchParams.append("limit", "12");
 
-    const { data, status } = await axios.get<Product[]>(url.toString(), {
+    let managedURL = url.toString();
+
+    const convertedFilter = filterSearchParamsConverter(filters);
+    managedURL = convertedFilter
+      ? `${managedURL}&${convertedFilter}`
+      : managedURL;
+
+    const { data, status } = await axios.get<Product[]>(managedURL, {
       headers: {
         Accept: "application/json",
       },
