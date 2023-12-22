@@ -26,7 +26,10 @@ const CartProductItem = (props: CartProductItemProps) => {
             <Text className="text-base font-semibold text-gray-600">
               {`${props.data.product?.price} ₺`}
             </Text>
-            <Text className="text-sm font-semibold text-gray-600">
+            <Text
+              className="text-sm font-semibold text-gray-600"
+              numberOfLines={1}
+            >
               {props.data.product.name}
             </Text>
           </View>

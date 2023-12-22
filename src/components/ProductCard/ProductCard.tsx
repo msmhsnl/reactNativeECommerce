@@ -22,7 +22,10 @@ const ProductCard = (props: ProductCardProps) => {
             <Text className="text-base font-semibold text-gray-600">
               {`${props.item?.price} ₺`}
             </Text>
-            <Text className="text-sm font-semibold text-gray-600">
+            <Text
+              className="text-sm font-semibold text-gray-600"
+              numberOfLines={2}
+            >
               {props.item.name}
             </Text>
           </View>
