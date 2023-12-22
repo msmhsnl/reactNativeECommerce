@@ -20,7 +20,7 @@ const SearchInput = forwardRef((props: SearchInput, ref) => {
   }));
 
   return (
-    <View className="mx-4 my-2 p-2 bg-orange-200 flex-row rounded-xl">
+    <View className="mx-4 my-2 p-2 bg-orange-200 flex-row rounded-xl flex-1">
       <TouchableOpacity
         className="justify-center"
         onPress={() => props.search(inputText)}
