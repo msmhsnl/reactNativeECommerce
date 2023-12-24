@@ -56,6 +56,7 @@ const HomeScreen = (props: HomeProps & AppProps) => {
 
   useEffect(() => {
     initReduxCart();
+    getNextPageProducts();
   }, []);
 
   const getNextPageProducts = () => {

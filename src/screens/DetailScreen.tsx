@@ -12,7 +12,7 @@ import {
 import { useIsFocused } from "@react-navigation/native";
 
 import type { DetailProps } from "../navigation/NavigationTypes";
-import type { Product } from "../types/product";
+import type { Product } from "../types/Product";
 
 import getProductById from "../methods/getProductById";
 import { addToCart } from "../methods/cart/cartHelper";

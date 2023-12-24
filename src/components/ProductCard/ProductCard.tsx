@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View, Image } from "react-native";
 
-import type { Product } from "../../types/product";
+import type { Product } from "../../types/Product";
 import { addToCart } from "../../methods/cart/cartHelper";
 
 type ProductCardProps = {

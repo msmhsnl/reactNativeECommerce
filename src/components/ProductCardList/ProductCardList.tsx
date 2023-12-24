@@ -1,10 +1,9 @@
 import { View, FlatList } from "react-native";
 import React from "react";
-import { Ionicons } from "@expo/vector-icons";
 
 import ProductCard from "../ProductCard/ProductCard";
 
-import type { Product } from "../../types/product";
+import type { Product } from "../../types/Product";
 
 type ProductCardListProps = {
   data: Product[];
@@ -16,7 +15,7 @@ const ProductCardList = (props: ProductCardListProps) => {
   return (
     <FlatList
       contentContainerStyle={{ paddingBottom: 20 }}
-      className="p-2 bg-blue-50"
+      className="flex-1 p-2 bg-blue-50"
       data={props.data}
       renderItem={({ index, item }) => (
         <ProductCard item={item} navigateToDetail={props.navigateToDetail} />

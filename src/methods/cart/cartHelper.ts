@@ -1,5 +1,5 @@
 import storageService from "../../services/storageService";
-import type { Product } from "../../types/product";
+import type { Product } from "../../types/Product";
 import type { CartProductObj } from "../../types/CartProductObj";
 
 import store from "../../redux/store";
