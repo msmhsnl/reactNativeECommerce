@@ -1,12 +1,4 @@
-import { useEffect, useState } from "react";
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  Image,
-} from "react-native";
+import { Text, TouchableOpacity, View, Image } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 
@@ -20,6 +12,7 @@ const CartCounter = (props: CartCounterProps) => {
   return (
     <View className="flex-row m-2 justify-center items-center">
       <TouchableOpacity
+        testID="decrement"
         className="w-8 h-8 pr-1 rounded-full bg-orange-200 justify-center items-center"
         onPress={props.decrement}
       >
@@ -31,6 +24,7 @@ const CartCounter = (props: CartCounterProps) => {
         </Text>
       </View>
       <TouchableOpacity
+        testID="increment"
         className="w-8 h-8 pl-1 rounded-full bg-orange-200 justify-center items-center"
         onPress={props.increment}
       >
@@ -39,14 +33,5 @@ const CartCounter = (props: CartCounterProps) => {
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
 
 export default CartCounter;

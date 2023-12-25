@@ -14,10 +14,12 @@ const CartProductItem = (props: CartProductItemProps) => {
   return (
     <View className="p-2 w-full h-20 shadow-gray-950">
       <TouchableOpacity
+        testID="cart-item"
         className="bg-white w-full h-full shadow-dark-950 shadow-md rounded-xl overflow-hidden flex-row"
         onPress={() => props.navigateToDetail(props.data.product.id)}
       >
         <Image
+          testID="cart-item-image"
           source={{ uri: props.data.product.image }}
           className="w-1/4 h-full"
         />

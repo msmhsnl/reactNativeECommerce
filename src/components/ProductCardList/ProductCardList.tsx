@@ -3,6 +3,8 @@ import React from "react";
 
 import ProductCard from "../ProductCard/ProductCard";
 
+import { addToCart } from "../../methods/cart/cartHelper";
+
 import type { Product } from "../../types/Product";
 
 type ProductCardListProps = {
@@ -18,7 +20,11 @@ const ProductCardList = (props: ProductCardListProps) => {
       className="flex-1 p-2 bg-blue-50"
       data={props.data}
       renderItem={({ index, item }) => (
-        <ProductCard item={item} navigateToDetail={props.navigateToDetail} />
+        <ProductCard
+          item={item}
+          navigateToDetail={props.navigateToDetail}
+          addToCart={addToCart}
+        />
       )}
       keyExtractor={(item) => item.id}
       numColumns={2}

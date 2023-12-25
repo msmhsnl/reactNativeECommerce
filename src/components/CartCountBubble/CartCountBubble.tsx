@@ -5,7 +5,7 @@ import { AppState } from "../../redux/store";
 
 import { getTotalQuantity } from "../../methods/cart/cartHelper";
 
-const CartCountBubble = (props: AppProps) => {
+export const CartCountBubble = (props: AppProps) => {
   return (
     <View
       className="20flex-row justify-center items-center bg-orange-300 rounded-full absolute left-4 bottom-4"
