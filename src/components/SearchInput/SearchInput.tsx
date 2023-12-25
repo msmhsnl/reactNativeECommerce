@@ -3,12 +3,12 @@ import { View, TextInput, TouchableOpacity } from "react-native";
 
 import { Ionicons } from "@expo/vector-icons";
 
-type SearchInput = {
+type SearchInputProps = {
   search: (searchText: string) => void;
   placeholder: string;
 };
 
-const SearchInput = forwardRef((props: SearchInput, ref) => {
+const SearchInput = forwardRef((props: SearchInputProps, ref) => {
   const [inputText, setInputText] = useState("");
 
   const clearInput = () => {
@@ -22,6 +22,7 @@ const SearchInput = forwardRef((props: SearchInput, ref) => {
   return (
     <View className="mx-4 my-2 p-2 bg-orange-200 flex-row rounded-xl flex-1">
       <TouchableOpacity
+        testID="search-button"
         className="justify-center"
         onPress={() => props.search(inputText)}
       >
@@ -29,6 +30,7 @@ const SearchInput = forwardRef((props: SearchInput, ref) => {
       </TouchableOpacity>
 
       <TextInput
+        testID="search-input"
         placeholder={props?.placeholder}
         placeholderTextColor={"gray"}
         value={inputText}

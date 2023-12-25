@@ -10,7 +10,11 @@ type RadioOptionProps = {
 
 const RadioOption = (props: RadioOptionProps) => {
   return (
-    <TouchableOpacity className="flex-row items-center" onPress={props.onPress}>
+    <TouchableOpacity
+      testID="radio-option"
+      className="flex-row items-center"
+      onPress={props.onPress}
+    >
       <View className="mr-2">
         <RadioMarker active={props.active} />
       </View>

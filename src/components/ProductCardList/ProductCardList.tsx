@@ -3,19 +3,19 @@ import React from "react";
 
 import ProductCard from "../ProductCard/ProductCard";
 
-import { addToCart } from "../../methods/cart/cartHelper";
-
 import type { Product } from "../../types/Product";
 
 type ProductCardListProps = {
   data: Product[];
   getNextPageProducts: () => void;
   navigateToDetail: (productId: string) => void;
+  addToCart: (product: Product) => void;
 };
 
 const ProductCardList = (props: ProductCardListProps) => {
   return (
     <FlatList
+      testID="product-card-list"
       contentContainerStyle={{ paddingBottom: 20 }}
       className="flex-1 p-2 bg-blue-50"
       data={props.data}
@@ -23,7 +23,7 @@ const ProductCardList = (props: ProductCardListProps) => {
         <ProductCard
           item={item}
           navigateToDetail={props.navigateToDetail}
-          addToCart={addToCart}
+          addToCart={props.addToCart}
         />
       )}
       keyExtractor={(item) => item.id}

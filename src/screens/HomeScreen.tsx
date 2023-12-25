@@ -24,6 +24,8 @@ import getProductsByFilter from "../methods/getProductsByFilter";
 import { initReduxCart } from "../methods/cart/cartHelper";
 import RadioOption from "../components/RadioOption/RadioOption";
 
+import { addToCart } from "../methods/cart/cartHelper";
+
 const orderOptions = [
   {
     title: "Price high to low",
@@ -96,6 +98,7 @@ const HomeScreen = (props: HomeProps & AppProps) => {
         data={props.products}
         getNextPageProducts={getNextPageProducts}
         navigateToDetail={navigateToDetail}
+        addToCart={addToCart}
       />
       <Modal
         animationType="fade"
