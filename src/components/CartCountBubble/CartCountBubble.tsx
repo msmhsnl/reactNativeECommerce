@@ -3,7 +3,7 @@ import { Text, View } from "react-native";
 import { connect } from "react-redux";
 import { AppState } from "../../redux/store";
 
-import { getTotalQuantity } from "../../methods/cart/cartHelper";
+import getTotalQuantity from "../../methods/cart/getTotalQuantity";
 
 export const CartCountBubble = (props: AppProps) => {
   return props.cart?.length ? (

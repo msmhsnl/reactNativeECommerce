@@ -1,6 +1,6 @@
 import { Text, TouchableOpacity, View, Image } from "react-native";
 
-import { updateCartQuantity } from "../../methods/cart/cartHelper";
+import updateCartQuantity from "../../methods/cart/updateCartQuantity";
 import type { CartProductObj } from "../../types/CartProductObj";
 
 import CartCounter from "../CartCounter/CartCounter";

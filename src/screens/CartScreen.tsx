@@ -13,7 +13,7 @@ import { AppState } from "../redux/store";
 import type { CartProps } from "../navigation/NavigationTypes";
 
 import CartProductItem from "../components/CartProductItem/CartProductItem";
-import { getTotalPrice } from "../methods/cart/cartHelper";
+import getTotalPrice from "../methods/cart/getTotalPrice";
 
 const CartScreen = (props: CartProps & AppProps) => {
   const navigateToDetail = (productId: string) => {

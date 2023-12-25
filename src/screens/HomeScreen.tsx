@@ -24,7 +24,7 @@ import getProductsByFilter from "../methods/getProductsByFilter";
 import { initReduxCart } from "../methods/cart/cartHelper";
 import RadioOption from "../components/RadioOption/RadioOption";
 
-import { addToCart } from "../methods/cart/cartHelper";
+import addToCart from "../methods/cart/addToCart";
 
 const orderOptions = [
   {

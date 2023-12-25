@@ -15,7 +15,7 @@ import type { DetailProps } from "../navigation/NavigationTypes";
 import type { Product } from "../types/Product";
 
 import getProductById from "../methods/getProductById";
-import { addToCart } from "../methods/cart/cartHelper";
+import addToCart from "../methods/cart/addToCart";
 
 const DetailScreen = ({ route, navigation }: DetailProps) => {
   const [product, setProduct] = useState(null);
